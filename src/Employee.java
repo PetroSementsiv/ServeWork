@@ -1,110 +1,98 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
 public class Employee {
-
     private String name;
-    private int rate;
-    private static int hours;
-    public static int count = 0;
-    public static int sum =0;
-    public static int the = 0;
+    private DepartmentName department;
+    private int salary;
+    static int count = 0;
+    static enum DepartmentName {Custom, Finantial, IT, LaborProtection, Commercial}
 
-    Employee(){
+    public Employee(String name,  DepartmentName department, int salary) {
+        this.name = name;
+        this.department = department;
+        this.salary = salary;
         count++;
     }
 
 
 
-    public Employee(String name, int rate) {
-        super();
-        this.name = name;
-        this.rate = rate;
-        count++;
+
+
+
+    public static Employee[] createArr() {
+        Employee[] employees = new Employee[5];
+        employees[0] = new Employee("Vasyl", DepartmentName.Custom, 3200);
+        employees[1] = new Employee("Nazar", DepartmentName.Commercial, 3800);
+        employees[2] = new Employee("Evhen", DepartmentName.IT, 5500);
+        employees[3] = new Employee("Bogdan", DepartmentName.Finantial, 5200);
+        employees[4]= new Employee("Ivan", DepartmentName.Custom, 4500);
+        return  employees;
+
+
+
     }
-
-
-
-    public Employee(String name, int rate, int hours) {
-        super();
-        this.name = name;
-        this.rate = rate;
-        this.hours = hours;
-        count++;
-    }
-
-
-
-    public String getName() {
-        return name;
-    }
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public int getRate() {
-        return rate;
-    }
-
-
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-
-    public int getHours() {
-        return hours;
-    }
-
-
-
-    public int setHours(int hours) {
-        this.hours = hours;
-        return the += hours;
-    }
-
-    public static int totalHours() {
-        return the+= hours;
-    }
-
-    public int salary() {
-        return getRate()*getHours();
-    }
-
 
     @Override
     public String toString() {
-        return count + "Employee [name=" + name + ", rate=" + rate + ",  hours="+ hours +"]";
+        return count + "Employee" +" "+ name +" "+ "from" +" "+ department +" "+"department with" +" "+ salary;
     }
-
-    public void changeRate(int rate) {
-        sum -= this.rate;
-        this.rate = rate;
-        sum += rate;
-    }
-
-    public double bonuses() {
-        return 0.12*salary();
-    }
-
-
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        Employee employee1 = new Employee("Ivan", 15);
-        employee1.setHours(245);
-        System.out.println(employee1);
-        System.out.println("bonuses:"+" "+employee1.bonuses() + "\t"+"salary:" + employee1.salary());
-        Employee employee2 = new Employee("Oleh", 18);
-        employee2.setHours(250);
-        System.out.println(employee2);
-        System.out.println("bonuses:"+" "+employee2.bonuses() + "\t"+"salary:" + employee2.salary());
-        Employee employee3 = new Employee("Petro", 20, 220);
 
-        System.out.println(employee3);
-        System.out.println("bonuses:"+" "+employee3.bonuses() + "\t"+"salary:" + employee3.salary());
+        Employee[] employees = createArr();
+        Scanner scaner  = new Scanner(System.in);
+        System.out.print("Choose department:");
+        String input  = scaner.next();
+        DepartmentName departmentName = DepartmentName.valueOf(input);
 
-        System.out.println("Total hours is:" +" "+Employee.totalHours());
+
+        printEmpByDepartment(employees, departmentName);
+
+        Arrays.sort(employees, new Comparator<Employee>() {
+            @Override
+            public int compare(Employee o1, Employee o2) {
+                if (o1.salary > o2.salary) {
+                    return 1;
+                }
+                if( o1.salary<o2.salary){
+
+                    return -1;}
+                else{
+                    return 0;
+                }
+            }
+        });
+
+        System.out.println(Arrays.toString(employees));
+
+        Arrays.sort(employees, new Comparator<Employee>() {
+            @Override
+            public int compare(Employee o1, Employee o2) {
+                if (o1.salary > o2.salary) {
+                    return -1;
+                }
+                if( o1.salary<o2.salary){
+
+                    return 1;}
+                else{
+                    return 0;
+                }
+            }
+        });
+        System.out.println(Arrays.toString(employees));
     }
+
+
+    public  static void printEmpByDepartment(Employee[] employees, DepartmentName department ){
+        for (int i=0; i<employees.length; i++){
+            if( department.equals(employees[i].department)){
+                System.out.println(employees[i]);
+            }
+
+        }
+    }
+
 
 }
