@@ -12,6 +12,7 @@ public class Main {
         String[] s5 = s2.split(" ");
         for (String s : s5) {
             System.out.println(s);
+
         }
 
         StringBuilder one = new StringBuilder(secondWordOfString(s3));
