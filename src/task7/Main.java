@@ -8,11 +8,11 @@ public class Main {
         String s2 = new String("I like to play different sport games");
         String s3 = "The winter  is the best  Season  s  for making fun with friends!";
 
+
         int n = ((longestWordfrom(s3))).length();
         String[] s5 = s2.split(" ");
         for (String s : s5) {
             System.out.println(s);
-
         }
 
         StringBuilder one = new StringBuilder(secondWordOfString(s3));
@@ -20,9 +20,7 @@ public class Main {
         String convertWord = s3.replaceAll("\\s+", " ").trim();
 
 
-
         System.out.println(s2.substring(0, 6).equals(s1));
-
         System.out.println("Capitalize string looks: "+ upperCaseWords(s3));
         System.out.println("Longest word in sentenses: "+ longestWordfrom(s3));
         System.out.println("Longest word in sentense has "+ n + " character");
